@@ -1,4 +1,4 @@
-# WhatsaApp-GPT
+# WhatsApp-GPT
 
 This is a Python script that uses OpenAI's GPT-3 API to reply to incoming WhatsApp messages automatically. The script is intended to be run on a local machine and requires a WhatsApp account to be registered on the same machine.
 

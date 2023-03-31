@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
+from PyQt5.QtGui import QPixmap
 
 import time
 import sys
@@ -20,7 +21,12 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi('gui.ui', self)
         self.connectBtn.clicked.connect(self.connect)
         self.stopBtn.clicked.connect(self.stop)   
-        self.replyBtn.clicked.connect(self.replyThread)         
+        self.replyBtn.clicked.connect(self.replyThread)
+
+        self.greenLight = QPixmap('greenLight.png')
+        self.redLight = QPixmap('redLight.png')
+        self.status.setPixmap(self.redLight)
+        self.status.setScaledContents(True)        
         self.show() 
 
     def connect(self):
@@ -31,13 +37,18 @@ class MainWindow(QtWidgets.QMainWindow):
         login_page.load()
         QMessageBox.about(self, "Connected", "Connected successfully!")
 
+
     def stop(self):
         self.running = False
         QMessageBox.about(self, "Script stopped", "Script stopped")
+        self.status.setPixmap(self.redLight)
+        self.status.setScaledContents(True)  
 
     def replyThread(self):      
         t1=Thread(target=self.reply)
         self.running = True
+        self.status.setPixmap(self.greenLight)
+        self.status.setScaledContents(True) 
         QMessageBox.about(self, "Script started", "Script started")
         t1.start()
 

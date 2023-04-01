@@ -14,7 +14,6 @@ import openai
 # Set up your API key
 openai.api_key = "Put your API here"
 
-
 class MainWindow(QtWidgets.QMainWindow):      
     def __init__(self):   
         super(MainWindow, self).__init__()
@@ -30,13 +29,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.show() 
 
     def connect(self):
-        # Creating the driver (browser)
-        self.driver = webdriver.Firefox()
-        # Login (Get your phone ready to read the QR code)
-        login_page = LoginPage(self.driver)
-        login_page.load()
-        QMessageBox.about(self, "Connected", "Connected successfully!")
 
+        try:
+            # Creating the driver (browser)
+            self.driver = webdriver.Firefox()
+            # Login (Get your phone ready to read the QR code)
+            login_page = LoginPage(self.driver)
+            login_page.load()
+            QMessageBox.about(self, "Scan QR code", "Scan QR code and wait for few seconds!")
+
+        except:   
+            QMessageBox.about(self, "Error", "Check your connection")
 
     def stop(self):
         self.running = False
@@ -62,7 +65,9 @@ class MainWindow(QtWidgets.QMainWindow):
             # Open each chat using loop and read message.
             for chat in unread_chats:
                 chat.click()
-
+                
+                name =  self.driver.find_element('xpath',"// span[@data-testid='conversation-info-header-chat-title']")
+                print(name.text)
                 # For getting message to perform action
                 message = self.driver.find_elements('xpath',"//div[@class='copyable-text']")
                 # print last massage in chat
@@ -74,10 +79,18 @@ class MainWindow(QtWidgets.QMainWindow):
                 response =response['choices'][0]['message']['content']
                 print(response)
                 
+                
                 text_input = self.driver.find_element('xpath',"//div[@title='Type a message']")
                 for i in response:
                     text_input.send_keys(i)
                 text_input.send_keys(Keys.RETURN) 
+
+                # Send logs to GUI
+                self.textBrowser.append(f'Sender: {name.text}')
+                self.textBrowser.append(f'Message: {message[len(message)-1].text}')
+                self.textBrowser.append(f'Reply: {response}')
+                self.textBrowser.append('--------------------------')
+
                 # Go back to pinned message (delete next 2 lines if you don't have a pinned chat)
                 pinned = self.driver.find_element('xpath',"// span[@title='Notes']")
                 pinned.click()

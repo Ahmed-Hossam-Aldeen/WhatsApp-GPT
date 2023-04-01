@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>478</width>
-    <height>217</height>
+    <width>682</width>
+    <height>539</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <widget class="QPushButton" name="connectBtn">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>190</x>
       <y>60</y>
       <width>271</width>
       <height>41</height>
@@ -33,7 +33,7 @@
    <widget class="QPushButton" name="replyBtn">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>210</x>
       <y>130</y>
       <width>93</width>
       <height>28</height>
@@ -46,7 +46,7 @@
    <widget class="QPushButton" name="stopBtn">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>330</x>
       <y>130</y>
       <width>93</width>
       <height>28</height>
@@ -59,7 +59,7 @@
    <widget class="QLabel" name="status">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>480</x>
       <y>70</y>
       <width>21</width>
       <height>21</height>
@@ -67,6 +67,32 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>240</y>
+      <width>611</width>
+      <height>261</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 15pt &quot;Arial&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Chat Logs:</string>
     </property>
    </widget>
   </widget>
